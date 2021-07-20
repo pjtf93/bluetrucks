@@ -35,7 +35,6 @@ function App() {
   };
 
   const countEntries = (array) => {
-    console.log(array);
     const statusCount = array.map((item) => item.status);
     const counter = statusCount.reduce(function (previous, current) {
       previous[current] = (previous[current] || 0) + 1;
@@ -43,22 +42,6 @@ function App() {
     }, {});
     setCount(counter);
   };
-
-  // const statusCount = deliveries.map((item) => item.status);
-
-  // console.log(statusCount);
-
-  // const map = statusCount.reduce(function (prev, current) {
-  //   // console.log(prev, 'prev');
-  //   // console.log(current, 'current');
-  //   // console.log(prev[cur], 'prev cur');
-  //   prev[current] = (prev[current] || 0) + 1;
-  //   // console.log(prev, 2);
-  //   return prev;
-  // }, {});
-
-  // console.log(Object.entries(map).map((item) => item));
-  // const countValues = () => {};
 
   const options = deliveries?.map((delivery) => delivery.status);
   // Because using Set deletes the dupliaces of an array and returns an object
@@ -77,7 +60,6 @@ function App() {
       const newStatus = status?.filter((item) => item !== e.target.value);
       setStatus(newStatus);
     }
-    // const
   };
 
   const getData = async () => {
@@ -99,16 +81,12 @@ function App() {
 
   useEffect(() => {
     if (showToday === true || status.length > 0) {
-      console.log('filteredData');
       countEntries(filteredData);
     } else {
-      console.log('deliveries ');
       countEntries(deliveries);
     }
     return () => {};
   }, [showToday, status, filteredData, deliveries]);
-
-  console.log(filteredData, ' filtered');
 
   return (
     <div className='home-container'>
@@ -119,7 +97,7 @@ function App() {
         onCheckedValue={onCheckedValue}
       />
 
-      <table>
+      <table className='padding-container'>
         <caption>List of deliveries</caption>
         <thead>
           <tr>
@@ -141,7 +119,7 @@ function App() {
               })}
         </tbody>
       </table>
-      <div>
+      <div className='padding-container'>
         <h3>Values count</h3>
         <div>
           {Object?.entries(count)?.map((item, index) => {
