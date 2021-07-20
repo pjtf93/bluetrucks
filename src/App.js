@@ -12,8 +12,9 @@ function App() {
 
   const today = '2021-07-16';
 
+  // Filter by delivery status, by today deliveries or both
   const filterByStatus = () => {
-    if (showToday && status.length > 0) {
+    if (showToday === true && status.length > 0) {
       const data = deliveries?.filter((item) => {
         return status?.includes(item.status) & (item.date === today);
       });
@@ -77,6 +78,7 @@ function App() {
     filterByStatus();
 
     return () => {};
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showToday, status]);
 
   useEffect(() => {
